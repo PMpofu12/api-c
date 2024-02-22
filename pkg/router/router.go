@@ -11,4 +11,5 @@ func InitializeRouter() {
 	Router.GET("/albums", handler.GetAlbums)
 	Router.GET("/albums/:id", handler.GetAlbumByID)
 	Router.POST("/albums", handler.PostAlbum)
+	Router.Run("localhost:8080")
 }
