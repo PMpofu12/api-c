@@ -19,12 +19,12 @@ func (cc *CryptocurrencyController) GetCryptocurrencies(c *gin.Context) {
 	}
 
 	defer response.Body.Close()
-	var cryptoResponse model.CryptocurrencyList
+	var cryptocurrencyList model.CryptocurrencyList
 
-	if err := json.NewDecoder(response.Body).Decode(&cryptoResponse.Cryptocurrencies); err != nil {
+	if err := json.NewDecoder(response.Body).Decode(&cryptocurrencyList.Cryptocurrencies); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to parse response from CoinGecko API"})
 		return
 	}
 
-	c.JSON(http.StatusOK, cryptoResponse)
+	c.JSON(http.StatusOK, cryptocurrencyList)
 }
