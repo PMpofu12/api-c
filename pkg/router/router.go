@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter() *gin.Engine {
+func Start() *gin.Engine {
 	router := gin.Default()
 
 	cryptoController := &controller.CryptocurrencyController{}
