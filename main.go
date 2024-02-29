@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/api-prices/pkg/router"
+	"github.com/api-market-data/pkg/router"
 )
 
 func main() {

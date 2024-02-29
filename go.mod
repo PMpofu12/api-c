@@ -1,4 +1,4 @@
-module github.com/api-prices
+module github.com/api-market-data
 
 go 1.21.1
 

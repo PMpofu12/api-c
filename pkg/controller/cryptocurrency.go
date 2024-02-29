@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/api-prices/pkg/model"
+	"github.com/api-market-data/pkg/model"
 	"github.com/gin-gonic/gin"
 )
 

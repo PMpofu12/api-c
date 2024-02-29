@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/api-prices/pkg/controller"
+	"github.com/api-market-data/pkg/controller"
 
 	"github.com/gin-gonic/gin"
 )
