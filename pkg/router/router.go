@@ -11,7 +11,7 @@ func Start() *gin.Engine {
 
 	cryptoController := &controller.CryptocurrencyController{}
 
-	router.GET("/cryptocurrencies", cryptoController.GetCryptocurrencies)
+	router.GET("/cryptocurrencies/:currency/", cryptoController.GetCryptocurrencies)
 
 	return router
 }
