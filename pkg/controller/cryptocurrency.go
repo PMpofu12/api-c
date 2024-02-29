@@ -15,6 +15,11 @@ func (cc *CryptocurrencyController) GetCryptocurrencies(c *gin.Context) {
 
 	currency := c.Param("currency")
 
+	if currency == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Currency not specified"})
+		return
+	}
+
 	url := fmt.Sprintf("https://api.coingecko.com/api/v3/coins/markets?vs_currency=%s&order=market_cap_desc&per_page=10", currency)
 	response, err := http.Get(url)
 	if err != nil {
