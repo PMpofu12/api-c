@@ -11,7 +11,7 @@ import (
 
 type CryptocurrencyController struct{}
 
-func (cc *CryptocurrencyController) GetCryptocurrencies(c *gin.Context) {
+func (cc *CryptocurrencyController) GetCurrentMarketData(c *gin.Context) {
 
 	currency := c.Param("currency")
 
