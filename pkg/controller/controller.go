@@ -9,12 +9,7 @@ import (
 type CryptocurrencyController struct{}
 
 func (cc *CryptocurrencyController) GetCurrentMarketData(c *gin.Context) {
-	currency := c.Param("currency")
-	if currency == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "currency not specified"})
-		return
-	}
-	cryptocurrencyList, err := cc.getCurrentMarketData(currency)
+	cryptocurrencyList, err := cc.getCurrentMarketData()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch data from CoinGecko API"})
 		return
@@ -23,18 +18,19 @@ func (cc *CryptocurrencyController) GetCurrentMarketData(c *gin.Context) {
 }
 
 func (cc *CryptocurrencyController) GetCurrentCoinData(c *gin.Context) {
-	currency := c.Param("currency")
-	cryptocurrency := c.Param("cryptocurrency")
-	if currency == "" || cryptocurrency == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "currency or cryptocurrency not specified"})
+	id := c.Param("cryptocurrency")
+
+	if id == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "id not specified"})
 		return
 	}
-	cryptocurrencyList, err := cc.getCurrentMarketData(currency)
+
+	cryptocurrencyList, err := cc.getCurrentMarketData()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch data from CoinGecko API"})
 		return
 	}
-	cryptocurrencyData, err := cc.getCurrentCoinData(cryptocurrency, cryptocurrencyList)
+	cryptocurrencyData, err := cc.getCurrentCoinData(id, cryptocurrencyList)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return

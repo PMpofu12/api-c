@@ -11,7 +11,7 @@ func Start() *gin.Engine {
 
 	cryptoController := &controller.CryptocurrencyController{}
 
-	router.GET("/current/market/:currency/", cryptoController.GetCurrentMarketData)
+	router.GET("/current/market", cryptoController.GetCurrentMarketData)
 	router.GET("/current/:cryptocurrency", cryptoController.GetCurrentCoinData)
 
 	// router.GET("/historical/:coin/", cryptoController.GetCryptocurrencies) Pass the date as a paramaeter
