@@ -22,11 +22,11 @@ func (cc *CryptocurrencyController) getCurrentMarketData(vs_currency string) (mo
 	return cryptocurrencyList, nil
 }
 
-// func (cc *CryptocurrencyController) getCurrentCoinData(id string, cryptocurrencyList model.CryptocurrencyList) (*model.Cryptocurrency, error) {
-// 	for _, cryptocurrency := range cryptocurrencyList.Cryptocurrencies {
-// 		if cryptocurrency.ID == id {
-// 			return &cryptocurrency, nil
-// 		}
-// 	}
-// 	return nil, fmt.Errorf("cryptocurrency with id '%s' not found", id)
-// }
+func (cc *CryptocurrencyController) getCurrentCoinData(id string, cryptocurrencyList model.CryptocurrencyList) (*model.Cryptocurrency, error) {
+	for _, cryptocurrency := range cryptocurrencyList.Cryptocurrencies {
+		if cryptocurrency.ID == id {
+			return &cryptocurrency, nil
+		}
+	}
+	return nil, fmt.Errorf("cryptocurrency with id '%s' not found", id)
+}
