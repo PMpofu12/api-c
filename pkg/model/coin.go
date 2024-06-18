@@ -23,3 +23,9 @@ type CurrentCoinData struct {
 	AllTimeHighDate              string  `json:"ath_date"`
 	LastUpdated                  string  `json:"last_updated"`
 }
+
+type HistoricalCoinData struct {
+	Prices       []float64 `json:"prices"`
+	MarketCaps   []float64 `json:"market_caps"`
+	TotalVolumes []float64 `json:"total_volumes"`
+}
