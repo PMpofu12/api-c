@@ -1,10 +1,10 @@
 package model
 
-type CryptocurrencyList struct {
-	Cryptocurrencies []Cryptocurrency `json:"cryptocurrencies"`
+type CurrentMarketData struct {
+	CurrentMarketData []CurrentCoinData `json:"currentMarketData"`
 }
 
-type Cryptocurrency struct {
+type CurrentCoinData struct {
 	ID                           string  `json:"id"`
 	Symbol                       string  `json:"symbol"`
 	Name                         string  `json:"name"`

@@ -6,23 +6,23 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type CryptocurrencyController struct{}
+type CurrentMarketDataController struct{}
 
-func (cc *CryptocurrencyController) GetCurrentMarketData(c *gin.Context) {
+func (cmdc *CurrentMarketDataController) GetCurrentMarketData(c *gin.Context) {
 	vs_currency := c.Query("vs_currency")
 	if vs_currency == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "vs_currency not specified"})
 		return
 	}
-	cryptocurrencyList, err := cc.getCurrentMarketData(vs_currency)
+	currentMarketData, err := cmdc.getCurrentMarketData(vs_currency)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch data from CoinGecko API"})
 		return
 	}
-	c.JSON(http.StatusOK, cryptocurrencyList)
+	c.JSON(http.StatusOK, currentMarketData)
 }
 
-func (cc *CryptocurrencyController) GetCurrentCoinData(c *gin.Context) {
+func (cmdc *CurrentMarketDataController) GetCurrentCoinData(c *gin.Context) {
 	vs_currency := c.Query("vs_currency")
 	if vs_currency == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "vs_currency not specified"})
@@ -33,15 +33,15 @@ func (cc *CryptocurrencyController) GetCurrentCoinData(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "id not specified"})
 		return
 	}
-	cryptocurrencyList, err := cc.getCurrentMarketData(vs_currency)
+	currentMarketData, err := cmdc.getCurrentMarketData(vs_currency)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch data from CoinGecko API"})
 		return
 	}
-	cryptocurrencyData, err := cc.getCurrentCoinData(id, cryptocurrencyList)
+	currentCoinData, err := cmdc.getCurrentCoinData(id, currentMarketData)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, cryptocurrencyData)
+	c.JSON(http.StatusOK, currentCoinData)
 }
