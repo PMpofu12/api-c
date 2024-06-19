@@ -30,3 +30,17 @@ func (cmdc *CurrentMarketDataController) getCurrentCoinData(id string, currentMa
 	}
 	return nil, fmt.Errorf("coin with id '%s' not found", id)
 }
+
+func (hcd *HistoricalCoinDataController) getHistoricalCoinData(vs_currency string, dateFrom float64, dateTo float64, id string) (model.HistoricalCoinData, error) {
+	url := fmt.Sprintf("https://api.coingecko.com/api/v3/coins/%s/market_chart/range?vs_currency=%s&from=%f&to=%f", id, vs_currency, dateFrom, dateTo)
+	response, err := http.Get(url)
+	if err != nil {
+		return model.HistoricalCoinData{}, err
+	}
+	defer response.Body.Close()
+	var historicalCoinData model.HistoricalCoinData
+	if err := json.NewDecoder(response.Body).Decode(&historicalCoinData); err != nil {
+		return model.HistoricalCoinData{}, err
+	}
+	return historicalCoinData, nil
+}
